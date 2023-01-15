@@ -36,42 +36,43 @@ with open(budget_csv) as csv_file:
         count+= 1
     #   Adding in Profit values to list
         profit.append(row[1])
-        Totalp =Totalp + int(row[1])
+        Totalp += int(row[1])
+       
         #  calcing average values
+       
         final_p = int(row[1])
-        change_p = final_p - start_p
+        monthly_change_p = final_p - start_p
 
-        change_M.append(change_p)
 
-        profit_change = profit_change + change_p
-        
-        average_change = (profit_change/len(month_count))
+        change_M.append(monthly_change_p)
+
+        profit_change += monthly_change_p
+
+        average_change = (profit_change/ count)
         start_p = final_p
-        #  calculating the values and date to greatest and least values
+    
+        # calculating the values and date to greatest and least values
         greatest_inc = max(change_M)
         greatest_dec = min(change_M)
 
         inc_date = month_count[change_M.index(greatest_inc)]
         dec_date = month_count[change_M.index(greatest_dec)]
 
-    print("Financial Analysis")
-    print("----------------------------------")
-    print(f'Total Months: {len(month_count)}')
-    print(f'Total Profits: ${str(Totalp)}')
-    print(f'Average Change: $ {average_change}')
-    print(f'Greatest Increase in Profits: {str(inc_date)} ($ {str(greatest_inc)})')
-    print(f'Greatest Decrease in Profits: {str(dec_date)} ($ {str(greatest_dec)})')
+    
+    Output = (
+    "\nFinancial Analysis\n"
+   "----------------------------------\n"
+   f'Total Months: {len(month_count)}\n'
+    f'Total Profits: ${str(Totalp)}\n'
+     f'Average Change: $ {round(average_change,2)}\n'
+    f'Greatest Increase in Profits: {str(inc_date)} ($ {str(greatest_inc)})\n'
+    f'Greatest Decrease in Profits: {str(dec_date)} ($ {str(greatest_dec)})\n'
+    )
+print(Output)
 
 # # Finding the right file to place the csv file under
-# output_file= os.path.join("analysis","budget_final.txt")
+output_file= os.path.join("analysis","budget_final.txt")
 # # setting up the loop for writing the data
-# with open(output_file, "w") as datafile:
-   
+with open(output_file, "w") as datafile:
+    datafile.write(Output)
 
-#     datafile.write("Financial Analysis\n")
-#     datafile.write("----------------------------------\n")
-#     datafile.write(f'Total Months: {len(month_count)}')
-#     datafile.write(f'Total Profits: ${str(Totalp)}')
-#     datafile.write(f'Average Change: $ {average_change}')
-#     datafile.write(f'Greatest Increase in Profits: {str(inc_date)} ($ {str(greatest_inc)})')
-#     datafile.write(f'Greatest Decrease in Profits: {str(dec_date)} ($ {str(greatest_dec)})')
