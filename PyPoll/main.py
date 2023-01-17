@@ -18,7 +18,7 @@ with open(Poll_csv,newline="") as csv_file:
 
     # for loop to add a list for total candidates, while setting the count
     for row in csv_reader:
-        count += + 1 
+        count += 1 
         candidate_list.append(row[2])
     # Setting another for loop to determine vote count and other metrics for candidate
     for x in set(candidate_list):
